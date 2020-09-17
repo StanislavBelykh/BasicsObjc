@@ -81,7 +81,33 @@ int main(int argc, const char * argv[]) {
         userStore = createStoreList();
         printUsersForStore(userStore);
 
-        printf("Result: %0.2f \n", mathFunc(plus, 1, 1) );
+        double first;
+        double second;
+        char operation;
+        
+        printf("Введите первую цифру: \n");
+        scanf("%lf", &first);
+        printf("Введите вторую цифру: \n");
+        scanf("%lf", &second);
+        printf("Введите знак операции: \n");
+        scanf("%s", &operation);
+        switch (operation) {
+            case '+':
+                printf("Result: %0.2f \n", mathFunc(plus, first, second) );
+                break;
+            case '-':
+                printf("Result: %0.2f \n", mathFunc(minus, first, second) );
+                break;
+            case '/':
+                printf("Result: %0.2f \n", mathFunc(divide, first, second) );
+                break;
+            case '*':
+                printf("Result: %0.2f \n", mathFunc(multiply, first, second) );
+                break;
+            default:
+                printf("Ошибка! Не верно введен знак операции!");
+                break;
+        }
     }
     return 0;
 }
