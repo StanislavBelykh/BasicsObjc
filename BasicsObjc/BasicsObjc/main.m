@@ -8,15 +8,46 @@
 
 #import <Foundation/Foundation.h>
 
-void checkChar(char character) {
-    int intChar = character;
+struct UserStore {
+    NSMutableArray *users;
+};
+typedef struct UserStore UserStore;
+
+void addUserInStore(struct UserStore store) {
+    char nameChar[40];
+    NSString *user;
+    printf("Введите имя пользователя для добавление в список: \n");
+    scanf("%s", nameChar);
     
-    if ((intChar >= 65 && intChar <= 90) || (intChar >= 97 && intChar <= 122)){
-        printf("Буква %c из английского алфавита \n", character);
-    } else {
-        printf("Cимвол %c не принадлежит английскому алфавиту \n", character);
+    user = [NSString stringWithCString: nameChar encoding:1];
+    [store.users addObject: user];
+};
+
+UserStore createStoreList() {
+    UserStore userStore;
+    userStore.users = [NSMutableArray array];
+    do {
+        char answer;
+        printf("Внести еще одного пользователя? (y/n) \n");
+        scanf("%s", &answer);
+        if (answer == 'n') {
+            return userStore;
+        } else if (answer == 'y') {
+            addUserInStore(userStore);
+            continue;
+        } else {
+            printf("неверная команда попробуйте еще раз \n");
+            continue;
+        }
+        
+    } while (true);
+};
+
+void printUsersForStore(struct UserStore store) {
+    for (int i = 0; i < store.users.count; i++) {
+        NSLog(@"User # %d: %@ \n", i, store.users[i]);
     }
-}
+};
 
 enum OperationType {
     plus,
@@ -46,8 +77,10 @@ double mathFunc(enum OperationType operation, double first, double second) {
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        
-        checkChar('A');
+        UserStore userStore;
+        userStore = createStoreList();
+        printUsersForStore(userStore);
+
         printf("Result: %0.2f \n", mathFunc(plus, 1, 1) );
     }
     return 0;
