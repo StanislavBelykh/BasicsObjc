@@ -65,8 +65,6 @@ int main(int argc, const char * argv[]) {
         
         NSLog(@"%@", filterOk(numbers, Less, @5));
         
-        sleep(2);
-        /*
         dispatch_queue_t serial_queue = dispatch_queue_create("ru.example.serialQueue", NULL);
         dispatch_queue_t cuncurrent_queue = dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0);
         
@@ -129,7 +127,7 @@ int main(int argc, const char * argv[]) {
         
         sleep(5);
         printf("resultError: %d \n", resultError);
-        */
+        
     }
     return 0;
 }
